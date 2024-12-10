@@ -9,6 +9,10 @@ public class ScreenManager : MonoBehaviour
 
     public GameObject buttons;
     public GameObject title;
+
+    bool videoRodando = false;
+
+    public GameObject video;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,7 +22,26 @@ public class ScreenManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (videoRodando == false)
+        {
+            if (video.GetComponent<VideoPlayer>().isPlaying == true) { videoRodando = true; }
+        }
+        else
+        {
+            if (video.GetComponent<VideoPlayer>().isPlaying == false)
+            {
+                video.SetActive(false);
+                buttons.SetActive(true);
+                title.SetActive(true);
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            video.SetActive(false);
+            buttons.SetActive(true);
+            title.SetActive(true);
+        }
     }
 
     public void Play() 
