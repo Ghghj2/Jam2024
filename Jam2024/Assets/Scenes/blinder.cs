@@ -5,9 +5,9 @@ using UnityEngine;
 public class blinder : MonoBehaviour
 {
 
-    [SerializeField] float charSpeed = 2f;
+    [SerializeField] float charSpeed = 3f;
     [SerializeField] float minJumpForce = 5.0f;
-    [SerializeField] float maxJumpForce = 10.0f;
+    [SerializeField] float maxJumpForce = 5.17f;
     [SerializeField] float jumpChargeRate = 1.0f;
     [SerializeField] float gravityScale = 3.0f;
     private Rigidbody2D rb;
@@ -15,6 +15,7 @@ public class blinder : MonoBehaviour
     float currentJumpForce;
 
     private bool isHoldingJump;
+    public Transform spawnPoint;
     // Start is called before the first frame update
     void Start()
     {
@@ -55,5 +56,12 @@ public class blinder : MonoBehaviour
         {
             isGrounded = true;
         }
+        else if (collision.gameObject.CompareTag("Damage")){
+            kill();
+        }
+    }
+
+    void kill() {
+        transform.position = spawnPoint.position;
     }
 }
